@@ -11,8 +11,8 @@ async function getData() {
   const res = await fetch(api_url);
   var data = await res.json();
   // console.log(dataTemp);
-  document.getElementById("lightswitch").checked = true;
-  document.getElementById("fanswitch").checked = true;
+  document.getElementById("lightswitch").checked = data.lightStatus;
+  document.getElementById("fanswitch").checked = data.fanStatus;
   // // return res;
   // console.log('woringkjin')
 

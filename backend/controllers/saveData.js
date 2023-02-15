@@ -1,7 +1,7 @@
 const { SensorData } = require("../models/dataModel");
 
 const saveData = async (req, res) => {
-  const { tempRecentData, humidityRecentData } = req.body;
+  const { tempRecentData, humidityRecentData, lightRecentData, fanRecentData } = req.body;
   temp_data = [];
   humidity_data = [];
   const alreadyData = await SensorData.findOne();
@@ -12,6 +12,8 @@ const saveData = async (req, res) => {
       {
         tempData: temp_data,
         humidityData: humidity_data,
+        lightStatus: lightRecentData,
+        fanStatus: fanRecentData,
       },
       (err, doc) => {
         if (err) console.log(err);
@@ -24,7 +26,9 @@ const saveData = async (req, res) => {
   } else {
     tempData = [...alreadyData.tempData, tempRecentData]
     humidityData = [...alreadyData.humidityData, humidityRecentData]
-    const update = {humidityData, tempData}
+    lightStatus = lightRecentData
+    fanStatus = fanRecentData
+    const update = {humidityData, tempData, lightStatus, fanStatus}
     const doc = await SensorData.findByIdAndUpdate(alreadyData._id, update, { returnOriginal: false});
     res.status(200).json({message: "Document Updated Successfully"})
   }

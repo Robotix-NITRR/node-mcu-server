@@ -12,6 +12,12 @@ const dataSchema = mongoose.Schema(
         type: Array, 
         items: Number,
       },
+      lightStatus:{
+        type: Boolean
+      },
+      fanStatus:{
+        type: Boolean
+      }
     },
     {
       timestamps: true,
